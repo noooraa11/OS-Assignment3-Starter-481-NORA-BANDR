@@ -32,11 +32,11 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
-| **Repository Link** | [Paste your repository link here] |
+| **Full Name** | [nora bandr albashir ] |
+| **Student ID** | [446052003] |
+| **University Email** | [446052003@std.psau.edu.sa |
+| **GitHub Username** | [@noooraa11] |
+| **Repository Link** | [( https://github.com/noooraa11/OS-Assignment3-Starter-481-NORA-BANDR/blob/main/MY_WORK.md )]
  
 ---
 
@@ -214,13 +214,13 @@
 
 > 💡 **TIP:** Fill this in **last**, after all entries are written.
 
-**Total time spent on assignment**: [X hours]
+**Total time spent on assignment**: [15 hours]
 
-**Most challenging part**:
+**Most challenging part**:Replacing the busy-waiting loops with the semaphore while ensuring proper thread shutdown without deadlocks.
 
-**Most interesting learning**:
+**Most interesting learning**:Seeing how `ReentrantLock` and `Semaphore` directly eliminate race conditions and CPU spinning overhead.
 
-**What I would do differently next time**:
+**What I would do differently next time**:Start breaking down the technical reflection questions alongside each coding feature to save time at the end.
 
 ---
 
@@ -240,7 +240,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Through this assignment, I gained a deep practical understanding of how critical sections and race conditions affect multi-threaded Java programs. I learned that without mutual exclusion mechanisms like `ReentrantLock`, concurrent threads can interleave their read-modify-write operations, leading to corrupted shared states and unpredictable program behavior. Implementing `try/finally` blocks taught me the importance of guaranteeing that locks are always released safely, even if exceptions arise. Furthermore, replacing active polling with a counting semaphore demonstrated how operating systems manage thread blocking and wake-up efficiency without wasting CPU cycles. Ultimately, this exercise bridged the gap between theoretical operating systems concepts and real-world concurrent programming safeguards ]
 
 ## Question 2: What was the most challenging part of this assignment?
 
@@ -248,7 +248,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[The most challenging part of this assignment was designing the semaphore integration to completely eliminate busy waiting while ensuring that all CPU worker threads terminate cleanly during shutdown. In the original starter code, CPUs continuously polled the ready queue in a tight loop, which wasted system resources. Transitioning to a counting semaphore required carefully tracking when to acquire permits upon dequeueing and when to release permits upon enqueueing processes. Handling the final shutdown signal without leaving worker threads blocked indefinitely in `acquire()` demanded careful condition checks. Balancing this logic alongside fine-grained locks for statistics made concurrency management intricate and required rigorous step-by-step debugging.]
 
 ## Question 3: How did you overcome the challenges you faced?
 
@@ -256,7 +256,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[I overcame these challenges by adopting a methodical, incremental approach to coding and testing. Whenever I encountered unexpected thread behavior or deadlocks, I reviewed the Chapter 5 lecture notes and re-read the assignment's `README.md` guidelines regarding semaphore initialization and cleanup. I also utilized targeted console print statements to trace thread execution flow and verify when permits were acquired or released. Testing my changes after implementing each individual feature—rather than all at once—helped me isolate errors immediately. Additionally, running the complete simulation multiple times consecutively ensured that the verification block passed reliably across all runs.]
 
 ## Question 4: Where can synchronization concepts be applied in real-world applications?
 
@@ -264,19 +264,19 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Synchronization concepts are foundational in any software environment where multiple threads or processes share resources. For instance, in online banking and financial transactions, mutual exclusion locks prevent race conditions when two users or automated services attempt to withdraw funds from the same account simultaneously, ensuring ledger accuracy. Another common application is in ticket reservation or seat-booking systems (such as airlines or cinemas), where semaphores and locks prevent double-booking the same seat when multiple customers try to purchase it at the exact same millisecond. Similarly, print spoolers and message queues use producer-consumer synchronization models to handle print jobs or network packets safely and sequentially without data loss.]
 
 ### Optional: What would you like to learn more about?
 
-[Any topics related to synchronization or operating systems that you're curious about?]
+[Through this assignment, I gained a deep practical understanding of how critical sections and race conditions affect multi-threaded Java programs. I learned that without mutual exclusion mechanisms like `ReentrantLock`, concurrent threads can interleave their read-modify-write operations, leading to corrupted shared states and unpredictable program behavior. Implementing `try/finally` blocks taught me the importance of guaranteeing that locks are always released safely, even if exceptions arise. Furthermore, replacing active polling with a counting semaphore demonstrated how operating systems manage thread blocking and wake-up efficiency without wasting CPU cycles. Ultimately, this exercise bridged the gap between theoretical operating systems concepts and real-world concurrent programming safeguards.]
 
 ### Optional: How confident do you feel about synchronization concepts now?
 
-[Beginner / Intermediate / Confident. What do you understand well? What needs more practice?]
+[The most challenging part of this assignment was designing the semaphore integration to completely eliminate busy waiting while ensuring that all CPU worker threads terminate cleanly during shutdown. In the original starter code, CPUs continuously polled the ready queue in a tight loop, which wasted system resources. Transitioning to a counting semaphore required carefully tracking when to acquire permits upon dequeueing and when to release permits upon enqueueing processes. Handling the final shutdown signal without leaving worker threads blocked indefinitely in `acquire()` demanded careful condition checks. Balancing this logic alongside fine-grained locks for statistics made concurrency management intricate and required rigorous step-by-step debugging.]
 
 ### Optional: Feedback on the assignment
 
-[Any comments? Was it helpful? Too easy or hard? Suggestions?]
+[I overcame these challenges by adopting a methodical, incremental approach to coding and testing. Whenever I encountered unexpected thread behavior or deadlocks, I reviewed the Chapter 5 lecture notes and re-read the assignment's `README.md` guidelines regarding semaphore initialization and cleanup. I also utilized targeted console print statements to trace thread execution flow and verify when permits were acquired or released. Testing my changes after implementing each individual feature—rather than all at once—helped me isolate errors immediately. Additionally, running the complete simulation multiple times consecutively ensured that the verification block passed reliably across all runs.]
 
 ---
 
@@ -298,7 +298,8 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[In the original starter code, a race condition occurs because multiple CPU threads attempt to read and remove processes from the shared ready queue concurrently without mutual exclusion. Specifically, when `ReadyQueue.poll()` executes, a thread reads the queue's head item, pauses via `RaceWindow.pause()`, and then removes it. If CPU-1 and CPU-2 read the same head item during this vulnerable window, both believe they own the process, leading to duplicated processing, incorrect counter increments, or null pointer exceptions. This exact bug happens on real hardware due to non-atomic multi-step operations and OS thread pre-emption, and it is notoriously hard to detect because it depends entirely on non-deterministic thread scheduling interleavings.]
+
 
 Verification block of the **original starter**:
 ```
@@ -311,7 +312,6 @@ Verification block of **my final version**:
 ```
 
 **Explanation of the timeline:**
-[Explain the lost update step by step.]
 
 ## Question 2: Critical Sections and Lock Granularity
 
@@ -321,8 +321,7 @@ Verification block of **my final version**:
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
-
+[I protected critical sections involving queue modifications and statistics updates using dedicated `ReentrantLock` instances. For lock granularity, I chose to use separate locks for the ready queue versus the statistics counters rather than a single global lock. This fine-grained approach reduces thread contention because a CPU updating execution metrics does not block another CPU from inspecting or modifying the ready queue concurrently. Mutual exclusion is enforced by wrapping critical operations inside `lock.lock()` and putting `lock.unlock()` in `try/finally` blocks. However, because standard `ReentrantLock` defaults to non-fair ordering, threads acquire locks based on availability rather than strict FIFO order, which can theoretically lead to thread starvation if contention is extremely high.]
 | Critical section (variable / method) | Lock used | Why it needs protection |
 |---|---|---|
 | [e.g., `ReadyQueue.poll()`] | [lock name] | [reason] |
@@ -336,7 +335,7 @@ Verification block of **my final version**:
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[In the starter code, busy waiting occurred when idle CPU threads repeatedly looped in a `while` condition checking if the ready queue was empty, wasting massive amounts of CPU processing cycles (evidenced by high poll counts in the starter output). In my final version, the counting semaphore represents the number of available processes currently waiting in the ready queue. Its initial value is set to match the number of initial processes loaded into the queue so that CPUs can immediately acquire permits without blocking unnecessarily. When the queue is empty, CPUs call `semaphore.acquire()`, placing them in a blocked waiting state managed efficiently by the OS kernel rather than consuming CPU time. At the end of the simulation, cleanup routines invoke release calls to unblock waiting threads so they can recognize termination flags and shut down cleanly.]
 
 ## Question 4: Classical Problems and Deadlock
 
@@ -347,25 +346,25 @@ Verification block of **my final version**:
 **Your Answer:** *(3-5 sentences)*
 
 **Classical problem and roles**:
-[Name the problem; who is the producer, who is the consumer?]
+[**Classical problem and roles**: This scenario models the classical **Producer-Consumer problem** (similar to the bounded-buffer problem). Here, scheduler threads or processes acting as producers generate tasks into the ready queue, while the CPU worker threads act as consumers that remove and execute processes.]
 
 **Semaphores for a bounded queue (name and initial value)**:
-[Name the three semaphores and their initial values.]
+[1. `empty` (initial value = `K`, representing available slots).
+2. `full` (initial value = `0`, representing available items to consume).
+3. `mutex` (initial value = `1`, for mutual exclusion over the buffer).]
 
 **Deadlock scenario and prevention**:
-[Describe the scenario and the necessary condition you would break.]
-
+[DA deadlock would occur if a CPU thread acquired the mutex lock first and then executed `semaphore.acquire()` while the semaphore count was zero (no processes available), causing it to sleep while holding the mutex. Consequently, producer threads attempting to add new processes would block waiting for the mutex held by the sleeping consumer, creating a permanent circular wait. To prevent this, we break the "Hold and Wait" necessary condition by ensuring that resource locks are released before blocking on synchronization primitives, or by adhering to a strict, globally consistent lock-acquisition order.]
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1. How mutual exclusion locks (`ReentrantLock`) prevent race conditions by protecting critical sections with `try/finally` blocks.
+2. The operational difference between active polling (busy waiting) and efficient thread suspension using counting semaphores.
+3. The importance of fine-grained lock granularity in minimizing thread contention and avoiding deadlocks in multi-threaded environments.
 
 **Concepts I need to study more:**
-1.
-2.
-
+1. Fair vs. non-fair lock policies in `ReentrantLock` and their impact on thread starvation.
+2. Advanced deadlock prevention algorithms and resource-allocation graph analysis.
 ---
 
 # ✅ Final Checklist (complete before submitting)
